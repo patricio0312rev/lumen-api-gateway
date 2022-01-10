@@ -35,7 +35,7 @@ $router->group(['prefix' => 'books', 'middleware' => 'client.credentials'], func
     $router->delete('/{book}', 'BookController@destroy');
 });
 
-$router->group(['prefix' => 'users'], function() use ($router){
+$router->group(['prefix' => 'users', 'middleware' => 'client.credentials'], function() use ($router){
     $router->get('/', 'UserController@index');
     $router->post('/', 'UserController@store');
     $router->get('/{user}', 'UserController@show');
@@ -44,3 +44,9 @@ $router->group(['prefix' => 'users'], function() use ($router){
     $router->delete('/{user}', 'UserController@destroy');
 });
 
+/**
+ * User credentials protected routes
+ */
+$router->group(['middleware' => 'auth:api'], function() use ($router){
+    $router->get('/me', 'UserController@me');
+});
