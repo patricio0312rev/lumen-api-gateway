@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use ConsumesExternalService;
+use App\Traits\ConsumesExternalService;
 
 class AuthorService {
     use ConsumesExternalService;
@@ -16,5 +16,13 @@ class AuthorService {
     public function __construct()
     {
         $this->baseUri = config('services.authors.base_uri');
+    }
+
+    /**
+     * Obtain the full list of authors from the author service
+     * @return string
+     */
+    public function obtainAuthors(){
+        return $this->performRequest('GET', '/authors');
     }
 }

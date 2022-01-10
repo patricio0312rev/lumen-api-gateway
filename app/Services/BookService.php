@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use ConsumesExternalService;
+use App\Traits\ConsumesExternalService;
 
 class BookService {
     use ConsumesExternalService;
