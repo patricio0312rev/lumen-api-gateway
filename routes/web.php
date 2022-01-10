@@ -34,3 +34,13 @@ $router->group(['prefix' => 'books', 'middleware' => 'client.credentials'], func
     $router->patch('/{book}', 'BookController@update');
     $router->delete('/{book}', 'BookController@destroy');
 });
+
+$router->group(['prefix' => 'users'], function() use ($router){
+    $router->get('/', 'UserController@index');
+    $router->post('/', 'UserController@store');
+    $router->get('/{user}', 'UserController@show');
+    $router->put('/{user}', 'UserController@update');
+    $router->patch('/{user}', 'UserController@update');
+    $router->delete('/{user}', 'UserController@destroy');
+});
+
