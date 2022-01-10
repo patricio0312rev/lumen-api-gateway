@@ -7,6 +7,7 @@ use App\Services\AuthorService;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
 
 class AuthorController extends Controller
 {
@@ -43,17 +44,7 @@ class AuthorController extends Controller
      * @return Illuminate/Http/Response
      */
     public function store(Request $request){
-        $rules = [
-            'name' => 'required|string|max:255',
-            'gender' => 'required|string|max:255|in:male,female',
-            'country' => 'required|string|max:255',
-        ];
-
-        $this->validate($request, $rules);
-
-        $author = Author::create($request->all());
-
-        return $this->successResponse($author, Response::HTTP_CREATED);
+        return $this->successResponse($this->authorService->createAuthor($request->all(), Response::HTTP_CREATED));
     }
 
     /**
