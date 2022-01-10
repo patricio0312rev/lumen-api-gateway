@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'authors'], function() use ($router){
+$router->group(['prefix' => 'authors', 'middleware' => 'client.credentials'], function() use ($router){
     $router->get('/', 'AuthorController@index');
     $router->post('/', 'AuthorController@store');
     $router->get('/{author}', 'AuthorController@show');
@@ -26,7 +26,7 @@ $router->group(['prefix' => 'authors'], function() use ($router){
     $router->delete('/{author}', 'AuthorController@destroy');
 });
 
-$router->group(['prefix' => 'books'], function() use ($router){
+$router->group(['prefix' => 'books', 'middleware' => 'client.credentials'], function() use ($router){
     $router->get('/', 'BookController@index');
     $router->post('/', 'BookController@store');
     $router->get('/{book}', 'BookController@show');
